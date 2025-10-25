@@ -2,11 +2,14 @@ import React from "react";
 
 import YoutubeLogo from "./YoutubeLogo.jsx";
 
-const Header = () => {
+const Header = ({ isOpen, setIsOpen }) => {
   return (
     <header>
       <div className="header-left">
-        <i class="fa-solid fa-bars cursor-pointer text-lg p-2"></i>
+        <i
+          className="fa-solid fa-bars cursor-pointer text-lg p-2"
+          onClick={() => setIsOpen(!isOpen)}
+        ></i>
         <a href="/">
           <YoutubeLogo />
         </a>
@@ -14,15 +17,15 @@ const Header = () => {
       <div className="header-center">
         <input type="text" placeholder="Search" />
         <button>
-          <i class="fa-solid fa-search"></i>
+          <i className="fa-solid fa-search"></i>
         </button>
       </div>
       <div className="header-right">
-        <button>
-          <i class="fa-solid fa-ellipsis-vertical cursor-pointer text-lg p-2"></i>
-        </button>
+        <a href="#">
+          <i className="fa-solid fa-ellipsis-vertical cursor-pointer text-lg p-2"></i>
+        </a>
         <div className="log-in">
-          <i class="fa-solid fa-user text-xs p-2 border-2 rounded-full"></i>
+          <i className="fa-solid fa-user-circle text-2xl"></i>
           <span>Log in</span>
         </div>
       </div>

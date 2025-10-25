@@ -1,10 +1,13 @@
-import Aside from "../components/Aside";
+import Sidebar from "../components/Sidebar";
 import Main from "../components/Main";
 
-const Home = () => {
+
+const Home = ( {isOpen }) => {
+
+
   return (
     <div className="home">
-      <Aside />
+      <Sidebar isOpen={isOpen} />
       <Main />
     </div>
   );

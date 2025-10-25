@@ -1,0 +1,12 @@
+{
+  "categories": [
+    { "name": "All", "icon": "fa-house" },
+    { "name": "New", "icon": "fa-fire" },
+    { "name": "Technology", "icon": "fa-microchip" },
+    { "name": "Sports", "icon": "fa-medal" },
+    { "name": "Gaming", "icon": "fa-gamepad" },
+    { "name": "Music", "icon": "fa-music" },
+    { "name": "Education", "icon": "fa-book" },
+    { "name": "Fashion", "icon": "fa-shirt" }
+  ]
+}

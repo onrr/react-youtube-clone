@@ -32,7 +32,7 @@
     @apply text-2xl sm:text-3xl font-semibold text-white;
   }
 
-  a {
+  a.active {
     color: var(--color-accent);
     transition: color 0.2s ease;
   }
@@ -79,16 +79,46 @@
     @apply flex flex-row items-center gap-x-4 sm:gap-x-6 mr-2 sm:mr-4;
 
     & .log-in {
-      @apply flex flex-row items-center gap-x-1 sm:gap-x-2 text-xs sm:text-sm font-semibold cursor-pointer sm:flex;
+      @apply flex flex-row items-center gap-x-1 sm:gap-x-2 text-xs md:text-sm font-semibold cursor-pointer sm:flex;
 
       & span {
-        @apply hidden md:block;
+        @apply hidden md:block text-center;
       }
     }
   }
 
   .home {
-    @apply flex flex-row;
+    @apply flex flex-row mx-5 my-8 h-full;
+
+    & .sidebar {
+      @apply w-[10%] h-full z-10;
+
+      & ul {
+        @apply flex flex-col items-start gap-y-10 text-base;
+
+        & li a i {
+          @apply text-lg lg:text-base;
+        }
+
+        & > li > a > span {
+          @apply hidden lg:inline-block;
+        }
+      }
+
+      & > nav {
+        & > hr {
+          @apply my-8 text-gray-600;
+        }
+
+        & > ul.channels > h3 {
+          @apply lg:inline-block hidden -my-2;
+        }
+      }
+    }
+
+    & .main {
+      @apply flex w-[90%] lg:pl-4;
+    }
   }
 
   .video-card {
