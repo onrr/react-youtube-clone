@@ -6,25 +6,16 @@
   --color-secondary: #18181b;
   --color-accent: #ff0033;
   --color-accent-hover: #ff334d;
-  --color-light-100: #f1f1f1;
-  --color-light-200: #c7c9d1;
-  --color-gray-100: #8b8d93;
-  --color-dark-100: #1f1f25;
   --color-border: #2a2a33;
 
   --font-heading: "Poppins", sans-serif;
   --font-body: "Inter", sans-serif;
-
-  --breakpoint-xs: 480px;
-  --breakpoint-sm: 640px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 1024px;
 }
 
 @layer base {
   body {
+    @apply text-gray-100;
     font-family: var(--font-body);
-    color: var(--color-light-100);
     background-color: var(--color-primary);
     font-optical-sizing: auto;
   }
@@ -55,16 +46,51 @@
   }
 
   header {
-    @apply mt-6 sm:mt-10;
+    @apply h-14 flex flex-row items-center justify-between mx-4 gap-x-2 lg:gap-x-0;
   }
 
-  header img {
-    @apply w-full max-w-lg h-auto object-contain mx-auto drop-shadow-md;
+  header svg {
+    @apply sm:w-[95px] object-contain text-gray-100;
   }
 }
 
-
 @layer components {
+  .header-left {
+    @apply flex flex-row items-center gap-x-2 sm:gap-x-4;
+  }
+
+  .header-center {
+    @apply flex flex-row items-center w-full sm:w-2xl;
+
+    & input {
+      @apply w-full h-10 px-3 sm:px-4 border rounded-s-2xl border-gray-400 text-sm sm:text-base;
+
+      &:focus {
+        @apply border-blue-500 outline-0;
+      }
+    }
+
+    & button {
+      @apply border rounded-se-2xl border-gray-400 h-10 px-3 sm:px-4 cursor-pointer text-sm sm:text-base;
+    }
+  }
+
+  .header-right {
+    @apply flex flex-row items-center gap-x-4 sm:gap-x-6 mr-2 sm:mr-4;
+
+    & .log-in {
+      @apply flex flex-row items-center gap-x-1 sm:gap-x-2 text-xs sm:text-sm font-semibold cursor-pointer sm:flex;
+
+      & span {
+        @apply hidden md:block;
+      }
+    }
+  }
+
+  .home {
+    @apply flex flex-row;
+  }
+
   .video-card {
     background-color: var(--color-secondary);
     border: 1px solid var(--color-border);
