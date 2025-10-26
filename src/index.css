@@ -32,6 +32,11 @@
     @apply text-2xl sm:text-3xl font-semibold text-white;
   }
 
+  h3 {
+    font-family: var(--font-body);
+    @apply text-base font-semibold text-white line-clamp-2;
+  }
+
   a.active {
     color: var(--color-accent);
     transition: color 0.2s ease;
@@ -101,7 +106,7 @@
         }
 
         & > li > a > span {
-          @apply hidden lg:inline-block;
+          @apply hidden lg:inline-block text-xs xl:text-base;
         }
       }
 
@@ -117,19 +122,24 @@
     }
 
     & .main {
-      @apply flex w-[90%] lg:pl-4;
+      @apply w-full md:w-[90%] grid grid-cols-1 mx-auto gap-6 pl-2 sm:pl-0 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
+
+      & .video-card {
+        @apply flex flex-col items-center bg-[var(--color-secondary)] border border-[var(--color-border)] rounded-lg cursor-pointer 
+        transition-transform duration-200 ease-in-out hover:-translate-y-1 hover:hover:shadow-[0_4px_16px_rgba(0,0,0,0.4)];
+
+        & img {
+          @apply w-100 h-60 object-cover;
+        }
+
+        & .info {
+          @apply flex flex-col overflow-hidden gap-y-2 my-4 mx-2;
+
+          & p {
+            @apply flex items-center justify-between text-sm text-gray-400;
+          }
+        }
+      }
     }
-  }
-
-  .video-card {
-    background-color: var(--color-secondary);
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .video-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
   }
 }

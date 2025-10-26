@@ -1,22 +1,26 @@
 import React from "react";
 import categories from "../data/categories.json";
 
-const Sidebar = ({ isOpen }) => {
-  console.log(isOpen);
+const Sidebar = ({ isOpen, selectedCategory, setSelectedCategory }) => {
   return (
     <div className="sidebar" style={{ display: isOpen ? "block" : "none" }}>
       <nav>
         <ul className="category">
           {categories.categories.map((category, i) => (
             <li key={i}>
-              <a href="#">
-                <i className={`fa-solid ${category.icon} mr-4`}></i>
+              <a
+                className={`cursor-pointer ${
+                  category.name === selectedCategory ? "active" : ""
+                }`}
+                onClick={() => setSelectedCategory(category.name)}
+              >
+                <i className={`fa-solid ${category.icon} mr-2 xl:mr-3`}></i>
                 <span>{category.name}</span>
               </a>
             </li>
           ))}
         </ul>
-        <hr />
+        <hr className="sm:mr-8" />
         <ul className="channels">
           <h3>Followed Channels</h3>
           <li>
