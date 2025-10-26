@@ -4,9 +4,10 @@
 @theme {
   --color-primary: #0d0d10;
   --color-secondary: #18181b;
-  --color-accent: #ff0033;
-  --color-accent-hover: #ff334d;
+  --color-accent: #f00;
+  --color-accent-hover: #f10;
   --color-border: #2a2a33;
+  --color-gray: #99a1af;
 
   --font-heading: "Poppins", sans-serif;
   --font-body: "Inter", sans-serif;
@@ -41,6 +42,7 @@
     color: var(--color-accent);
     transition: color 0.2s ease;
   }
+
   a:hover {
     color: var(--color-accent-hover);
   }
@@ -50,44 +52,66 @@
     background-color: var(--color-primary);
   }
 
-  header {
-    @apply h-14 flex flex-row items-center justify-between mx-4 gap-x-2 lg:gap-x-0;
-  }
-
-  header svg {
-    @apply sm:w-[95px] object-contain text-gray-100;
+  hr {
+    @apply text-border my-4;
   }
 }
 
 @layer components {
-  .header-left {
-    @apply flex flex-row items-center gap-x-2 sm:gap-x-4;
+  
+  .video-card {
+    @apply flex flex-col bg-[var(--color-secondary)] border border-[var(--color-border)] rounded-lg cursor-pointer 
+        transition-transform duration-200 ease-in-out hover:-translate-y-1 hover:hover:shadow-[0_4px_16px_rgba(0,0,0,0.4)];
+
+    & img {
+      @apply w-100 h-60 object-cover self-center;
+    }
+
+    & .info {
+      @apply flex flex-col overflow-hidden gap-y-2 my-4 mx-2;
+
+      & p {
+        @apply flex items-center justify-between text-sm text-[var(--color-gray)];
+      }
+    }
   }
 
-  .header-center {
-    @apply flex flex-row items-center w-full sm:w-2xl;
+  header {
+    @apply h-14 flex flex-row items-center justify-between mx-4 gap-x-2 lg:gap-x-0;
 
-    & input {
-      @apply w-full h-10 px-3 sm:px-4 border rounded-s-2xl border-gray-400 text-sm sm:text-base;
+    & svg {
+      @apply sm:w-[95px] object-contain text-gray-100;
+    }
 
-      &:focus {
-        @apply border-blue-500 outline-0;
+    & .header-left {
+      @apply flex flex-row items-center gap-x-2 sm:gap-x-4;
+    }
+
+    & .header-center {
+      @apply flex flex-row items-center w-full sm:w-2xl;
+
+      & input {
+        @apply w-full h-10 px-3 sm:px-4 border rounded-s-2xl border-gray-400 text-sm sm:text-base;
+
+        &:focus {
+          @apply border-blue-500 outline-0;
+        }
+      }
+
+      & button {
+        @apply border rounded-se-2xl border-gray-400 h-10 px-3 sm:px-4 cursor-pointer text-sm sm:text-base;
       }
     }
 
-    & button {
-      @apply border rounded-se-2xl border-gray-400 h-10 px-3 sm:px-4 cursor-pointer text-sm sm:text-base;
-    }
-  }
+    & .header-right {
+      @apply flex flex-row items-center gap-x-4 sm:gap-x-6 mr-2 sm:mr-4;
 
-  .header-right {
-    @apply flex flex-row items-center gap-x-4 sm:gap-x-6 mr-2 sm:mr-4;
+      & .log-in {
+        @apply flex flex-row items-center gap-x-1 sm:gap-x-2 text-xs md:text-sm font-semibold cursor-pointer sm:flex;
 
-    & .log-in {
-      @apply flex flex-row items-center gap-x-1 sm:gap-x-2 text-xs md:text-sm font-semibold cursor-pointer sm:flex;
-
-      & span {
-        @apply hidden md:block text-center;
+        & span {
+          @apply hidden md:block text-center;
+        }
       }
     }
   }
@@ -111,10 +135,6 @@
       }
 
       & > nav {
-        & > hr {
-          @apply my-8 text-gray-600;
-        }
-
         & > ul.channels > h3 {
           @apply lg:inline-block hidden -my-2;
         }
@@ -123,21 +143,100 @@
 
     & .main {
       @apply w-full md:w-[90%] grid grid-cols-1 mx-auto gap-6 pl-2 sm:pl-0 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
+    }
+  }
 
-      & .video-card {
-        @apply flex flex-col items-center bg-[var(--color-secondary)] border border-[var(--color-border)] rounded-lg cursor-pointer 
-        transition-transform duration-200 ease-in-out hover:-translate-y-1 hover:hover:shadow-[0_4px_16px_rgba(0,0,0,0.4)];
+  .detail {
+    @apply lg:flex lg:flex-row lg:justify-between gap-8 mx-5 my-8;
 
-        & img {
-          @apply w-100 h-60 object-cover;
+    & .video-detail {
+      @apply flex flex-col flex-2 gap-4;
+
+      & video {
+        @apply h-[35vh]! md:h-[55vh]! lg:h-[45vh]! xl:h-[65vh]! w-full!;
+      }
+
+      & h2 {
+        @apply text-xl;
+      }
+
+      & .video-stats {
+        @apply flex flex-row flex-wrap items-center justify-between gap-y-8 text-[var(--color-gray)] text-sm;
+
+        & .buttons {
+          @apply flex flex-row flex-wrap items-center text-base gap-x-6 gap-y-8;
+
+          & span {
+            @apply cursor-pointer;
+          }
+
+          & i {
+            @apply mr-2;
+          }
+        }
+      }
+
+      & .channel-detail {
+        @apply flex items-center justify-between;
+
+        & > div {
+          @apply flex items-center gap-x-4;
+
+          & > .channel-info > p {
+            @apply text-[var(--color-gray)] text-sm;
+          }
         }
 
-        & .info {
-          @apply flex flex-col overflow-hidden gap-y-2 my-4 mx-2;
+        & button {
+          @apply bg-[var(--color-accent)] px-4 py-2 cursor-pointer rounded-sm text-sm;
+        }
+      }
 
-          & p {
-            @apply flex items-center justify-between text-sm text-gray-400;
+      & .comment-list {
+        @apply flex flex-col items-start mx-4;
+
+        & li {
+          @apply flex flex-row items-center gap-x-4 mb-12;
+
+          & i {
+            @apply text-3xl cursor-pointer;
           }
+
+          & div {
+            @apply flex flex-col items-start justify-center;
+
+            & .user-comment-info {
+              @apply flex flex-row text-[var(--color-gray)] text-sm gap-x-4;
+            }
+
+            & .user-comment-text {
+              @apply flex flex-wrap text-gray-200 my-1;
+            }
+
+            & .user-comment-buttons {
+              @apply text-[var(--color-gray)] text-sm mt-2 flex flex-row flex-wrap gap-x-6;
+
+              & i {
+                @apply text-sm mr-2;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    & .suggested-videos {
+      @apply flex flex-col flex-1 gap-y-2;
+
+      & .video-card img {
+        @apply h-40;
+      }
+
+      & .video-card a {
+        @apply flex flex-row gap-x-2;
+
+        & p {
+          @apply mt-auto;
         }
       }
     }
