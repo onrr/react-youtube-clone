@@ -3,11 +3,8 @@ import Main from "../components/Main";
 import { useEffect, useState } from "react";
 import { FetchAPI } from "../utils/FetchApi";
 
-const Home = ({ isOpen }) => {
+const Home = ({ isOpen, selectedCategory, setSelectedCategory }) => {
   const [videos, setVideos] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState(() => {
-    return localStorage.getItem("selectedCategory") || "All";
-  });
 
   useEffect(() => {
     setVideos(null);

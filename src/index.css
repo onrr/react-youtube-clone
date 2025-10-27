@@ -58,7 +58,32 @@
 }
 
 @layer components {
-  
+  .search .search-main, .home .main {
+    @apply w-full md:w-[90%] grid grid-cols-1 mx-auto gap-6 pl-2 md:pl-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
+  }
+
+  .sidebar {
+    @apply w-[10%] h-full z-10;
+
+    & ul {
+      @apply flex flex-col items-start gap-y-10 text-base;
+
+      & li a i {
+        @apply text-lg lg:text-base;
+      }
+
+      & > li > a > span {
+        @apply hidden lg:inline-block text-xs xl:text-base;
+      }
+    }
+
+    & > nav {
+      & > ul.channels > h3 {
+        @apply lg:inline-block hidden -my-2;
+      }
+    }
+  }
+
   .video-card {
     @apply flex flex-col bg-[var(--color-secondary)] border border-[var(--color-border)] rounded-lg cursor-pointer 
         transition-transform duration-200 ease-in-out hover:-translate-y-1 hover:hover:shadow-[0_4px_16px_rgba(0,0,0,0.4)];
@@ -77,7 +102,7 @@
   }
 
   header {
-    @apply h-14 flex flex-row items-center justify-between mx-4 gap-x-2 lg:gap-x-0;
+    @apply h-14 flex flex-row items-center justify-between mx-4 gap-x-3 lg:gap-x-0;
 
     & svg {
       @apply sm:w-[95px] object-contain text-gray-100;
@@ -118,32 +143,6 @@
 
   .home {
     @apply flex flex-row mx-5 my-8 h-full;
-
-    & .sidebar {
-      @apply w-[10%] h-full z-10;
-
-      & ul {
-        @apply flex flex-col items-start gap-y-10 text-base;
-
-        & li a i {
-          @apply text-lg lg:text-base;
-        }
-
-        & > li > a > span {
-          @apply hidden lg:inline-block text-xs xl:text-base;
-        }
-      }
-
-      & > nav {
-        & > ul.channels > h3 {
-          @apply lg:inline-block hidden -my-2;
-        }
-      }
-    }
-
-    & .main {
-      @apply w-full md:w-[90%] grid grid-cols-1 mx-auto gap-6 pl-2 sm:pl-0 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
-    }
   }
 
   .detail {
@@ -153,7 +152,7 @@
       @apply flex flex-col flex-2 gap-4;
 
       & video {
-        @apply h-[35vh]! md:h-[55vh]! lg:h-[45vh]! xl:h-[65vh]! w-full!;
+        @apply h-[35vh]! sm:h-[50vh]! md:h-[45vh]! lg:h-[50vh]! xl:h-[68vh]! w-full!;
       }
 
       & h2 {
@@ -222,14 +221,20 @@
             }
           }
         }
+
+        @media (max-width: 1024px) {
+          & li:nth-child(n + 6) {
+            @apply hidden;
+          }
+        }
       }
     }
 
     & .suggested-videos {
-      @apply flex flex-col flex-1 gap-y-2;
+      @apply flex flex-col flex-1 gap-y-2 mx-4;
 
       & .video-card img {
-        @apply h-40;
+        @apply h-40 w-50;
       }
 
       & .video-card a {
@@ -237,6 +242,34 @@
 
         & p {
           @apply mt-auto;
+        }
+      }
+    }
+  }
+
+  .search {
+    @apply flex flex-row mx-5 my-8 h-full;
+
+    & .search-main {
+      @apply flex flex-col gap-y-8 mx-auto pl-2 md:pl-4;
+
+      & .video-card a {
+        @apply flex flex-col md:flex-row gap-x-4 hover:text-inherit;
+      }
+
+      & .video-card img {
+        @apply h-60 w-auto;
+      }
+
+      & .video-card .info {
+        @apply flex flex-col;
+
+        & p {
+          @apply flex flex-row items-center justify-start gap-x-4;
+        }
+
+        & .desc {
+          @apply text-gray-200;
         }
       }
     }

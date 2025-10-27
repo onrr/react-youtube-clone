@@ -9,6 +9,7 @@ const Sidebar = ({ isOpen, selectedCategory, setSelectedCategory }) => {
           {categories.categories.map((category, i) => (
             <li key={i}>
               <a
+                href="/"
                 className={`cursor-pointer ${
                   category.name === selectedCategory ? "active" : ""
                 }`}

@@ -16,12 +16,12 @@ const Detail = () => {
     );
 
     FetchAPI(`search?part=snippet&relatedToVideoId=${id}&type=video`).then(
-      (data) => setSuggestedVideo(data.items)
+      (data) => setSuggestedVideo(data.items.slice(0, 15))
     );
 
     FetchAPI(
       `commentThreads?part=snippet&videoId=${id}&maxResults=30order=date`
-    ).then((data) => setComments(data.items));
+    ).then((data) => setComments(data.items.slice(0, 15)));
   }, [id]);
 
   return (

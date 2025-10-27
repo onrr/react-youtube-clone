@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 
 import YoutubeLogo from "./YoutubeLogo.jsx";
+import { useNavigate } from "react-router-dom";
 
 const Header = ({ isOpen, setIsOpen }) => {
+  const [query, setQuery] = useState("");
+  const navigate = useNavigate();
+
+  const HandleSubmit = (e) => {
+    e.preventDefault();
+
+    if (query) {
+      navigate(`/search/${query}`);
+      setQuery("");
+    }
+  };
+
   return (
     <header>
       <div className="header-left">
@@ -14,12 +27,17 @@ const Header = ({ isOpen, setIsOpen }) => {
           <YoutubeLogo />
         </a>
       </div>
-      <div className="header-center">
-        <input type="text" placeholder="Search" />
-        <button>
+      <form className="header-center" onSubmit={HandleSubmit}>
+        <input
+          type="text"
+          placeholder="Search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <button type="submit">
           <i className="fa-solid fa-search"></i>
         </button>
-      </div>
+      </form>
       <div className="header-right">
         <a href="#">
           <i className="fa-solid fa-ellipsis-vertical cursor-pointer text-lg p-2"></i>
