@@ -1,10 +1,11 @@
 import "./App.css";
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Header from "./components/Header.jsx";
 import Home from "./pages/Home.jsx";
 import Detail from "./pages/Detail.jsx";
 import Search from "./pages/Search.jsx";
-import Header from "./components/Header.jsx";
+import Channel from "./pages/Channel.jsx";
 
 function App() {
   const [isOpen, setIsOpen] = useState(true);
@@ -28,6 +29,16 @@ function App() {
           }
         />
         <Route path="/video/:id" element={<Detail />} />
+        <Route
+          path="/channel/:id"
+          element={
+            <Channel
+              isOpen={isOpen}
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+            />
+          }
+        />
         <Route
           path="/search/:query"
           element={

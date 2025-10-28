@@ -36,14 +36,14 @@ const Detail = () => {
         <h2>{detail?.snippet?.title}</h2>
         <div className="video-stats">
           <div>
-            <span>{detail?.statistics?.viewCount}</span>
+            <span>{Number(detail?.statistics?.viewCount).toLocaleString('en-US')}</span>
             <span className="mx-2">•</span>
             <span>{moment(detail?.snippet?.publishedAt).fromNow()}</span>
           </div>
           <div className="buttons">
             <span>
               <i className="fa-solid fa-thumbs-up"></i>
-              {detail?.statistics?.likeCount}
+              {Number(detail?.statistics?.likeCount).toLocaleString('en-US')}
             </span>
             <span>
               <i className="fa-solid fa-thumbs-down"></i>-
@@ -98,7 +98,7 @@ const Detail = () => {
                   <div className="user-comment-buttons">
                     <span>
                       <i className="fa-solid fa-thumbs-up"></i>
-                      {comm?.snippet?.topLevelComment?.snippet?.likeCount}
+                      {Number(comm?.snippet?.topLevelComment?.snippet?.likeCount).toLocaleString('en-US')}
                     </span>
                     <span>
                       <i className="fa-solid fa-thumbs-down"></i>-

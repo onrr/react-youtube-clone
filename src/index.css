@@ -94,7 +94,7 @@
         transition-transform duration-200 ease-in-out hover:-translate-y-1 hover:hover:shadow-[0_4px_16px_rgba(0,0,0,0.4)];
 
     & img {
-      @apply w-100 h-60 object-cover self-center;
+      @apply w-100 h-60 object-cover self-center my-2;
     }
 
     & .info {
@@ -239,7 +239,7 @@
       @apply flex flex-col flex-1 gap-y-4 mx-4;
 
       & .video-card img {
-        @apply h-25 w-35 sm:h-40 sm:w-50;
+        @apply h-25 w-35 sm:h-auto sm:w-40;
       }
 
       & .video-card a {
@@ -253,17 +253,17 @@
   }
 
   .search {
-    @apply flex flex-row mx-5 my-8 h-full;
+    @apply flex flex-row my-8 h-full;
 
     & .search-main {
       @apply flex flex-col gap-y-8 mx-auto pl-2 md:pl-4;
 
       & .video-card a {
-        @apply flex flex-col md:flex-row gap-x-4 hover:text-inherit;
+        @apply flex flex-col md:flex-row hover:text-inherit;
       }
 
       & .video-card img {
-        @apply h-60 w-auto;
+        @apply h-60 w-auto mx-2;
       }
 
       & .video-card .info {
@@ -276,6 +276,52 @@
         & .desc {
           @apply text-gray-200;
         }
+      }
+    }
+  }
+
+  .channel {
+    @apply flex flex-row my-8 h-full;
+
+    & .channel-main {
+      @apply w-full md:w-[70%] mx-auto flex flex-col gap-y-10 px-2;
+
+      & .banner {
+        @apply h-40 md:h-60 w-full;
+
+        & img {
+          @apply h-full w-full object-cover rounded-xl;
+        }
+      }
+
+      & .channel-detail {
+        @apply flex items-center justify-between flex-wrap gap-y-4 mx-4;
+
+        & > div {
+          @apply flex flex-row gap-x-4;
+
+          & img {
+            @apply w-28 h-28 rounded-full;
+          }
+
+          & .channel-info {
+            & span {
+              @apply flex flex-wrap items-center gap-x-2 text-[var(--color-gray)] text-sm my-1 ;
+            }
+          }
+        }
+
+        & button {
+          @apply bg-[var(--color-accent)] px-4 py-2 cursor-pointer rounded-sm text-base mx-auto md:mx-0;
+        }
+      }
+    }
+
+    & .channel-videos {
+      @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4;
+
+      & img {
+        @apply h-40 sm:h-28 w-full object-cover;
       }
     }
   }
