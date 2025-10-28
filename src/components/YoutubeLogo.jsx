@@ -10,6 +10,7 @@ const YoutubeLogo = () => {
       style={{
         pointerEvents: "none",
         display: "block",
+        marginTop: 4,
       }}
     >
       <g

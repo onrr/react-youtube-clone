@@ -58,22 +58,27 @@
 }
 
 @layer components {
-  .search .search-main, .home .main {
-    @apply w-full md:w-[90%] grid grid-cols-1 mx-auto gap-6 pl-2 md:pl-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
+  .search .search-main,
+  .home .main {
+    @apply w-full md:w-[90%] grid grid-cols-1 mx-auto px-2 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
   }
 
   .sidebar {
-    @apply w-[10%] h-full z-10;
+    @apply w-auto h-full z-10 sticky left-0 top-22 bg-[var(--color-primary)];
 
     & ul {
-      @apply flex flex-col items-start gap-y-10 text-base;
+      @apply flex flex-col lg:items-start px-1 lg:px-5 gap-y-8 text-base;
+
+      & li a {
+        @apply flex flex-col items-center lg:flex-row lg:items-start;
+      }
 
       & li a i {
-        @apply text-lg lg:text-base;
+        @apply text-lg lg:text-base mr-0 lg:mr-1 xl:mr-2;
       }
 
       & > li > a > span {
-        @apply hidden lg:inline-block text-xs xl:text-base;
+        @apply inline-block text-[9px] lg:text-sm;
       }
     }
 
@@ -102,7 +107,7 @@
   }
 
   header {
-    @apply h-14 flex flex-row items-center justify-between mx-4 gap-x-3 lg:gap-x-0;
+    @apply h-14 flex flex-row items-center justify-between px-4 gap-x-3 lg:gap-x-0 sticky top-0 z-20 bg-[var(--color-primary)];
 
     & svg {
       @apply sm:w-[95px] object-contain text-gray-100;
@@ -142,7 +147,7 @@
   }
 
   .home {
-    @apply flex flex-row mx-5 my-8 h-full;
+    @apply flex flex-row my-8 h-full;
   }
 
   .detail {
@@ -151,8 +156,8 @@
     & .video-detail {
       @apply flex flex-col flex-2 gap-4;
 
-      & video {
-        @apply h-[35vh]! sm:h-[50vh]! md:h-[45vh]! lg:h-[50vh]! xl:h-[68vh]! w-full!;
+      & .react-player {
+        @apply h-[35vh]! sm:h-[50vh]! md:h-[40vh]! lg:h-[40vh]! xl:h-[68vh]! w-full!;
       }
 
       & h2 {
@@ -192,20 +197,20 @@
       }
 
       & .comment-list {
-        @apply flex flex-col items-start mx-4;
+        @apply flex flex-col items-start mx-1 lg:mx-2;
 
         & li {
-          @apply flex flex-row items-center gap-x-4 mb-12;
+          @apply flex flex-row items-start gap-x-4 mb-12;
 
           & i {
-            @apply text-3xl cursor-pointer;
+            @apply text-3xl cursor-pointer mt-2;
           }
 
           & div {
-            @apply flex flex-col items-start justify-center;
+            @apply flex flex-col items-start;
 
             & .user-comment-info {
-              @apply flex flex-row text-[var(--color-gray)] text-sm gap-x-4;
+              @apply flex flex-row flex-wrap text-[var(--color-gray)] text-sm gap-x-4;
             }
 
             & .user-comment-text {
@@ -231,10 +236,10 @@
     }
 
     & .suggested-videos {
-      @apply flex flex-col flex-1 gap-y-2 mx-4;
+      @apply flex flex-col flex-1 gap-y-4 mx-4;
 
       & .video-card img {
-        @apply h-40 w-50;
+        @apply h-25 w-35 sm:h-40 sm:w-50;
       }
 
       & .video-card a {

@@ -10,7 +10,7 @@ const Home = ({ isOpen, selectedCategory, setSelectedCategory }) => {
     setVideos(null);
     localStorage.setItem("selectedCategory", selectedCategory);
 
-    FetchAPI(`search?part=snippet&q=${selectedCategory}`).then((data) =>
+    FetchAPI(`search?part=snippet&q=${selectedCategory}&type=video`).then((data) =>
       setVideos(data.items)
     );
   }, [selectedCategory]);

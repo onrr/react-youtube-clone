@@ -15,36 +15,36 @@ const Sidebar = ({ isOpen, selectedCategory, setSelectedCategory }) => {
                 }`}
                 onClick={() => setSelectedCategory(category.name)}
               >
-                <i className={`fa-solid ${category.icon} mr-2 xl:mr-3`}></i>
+                <i className={`fa-solid ${category.icon}`}></i>
                 <span>{category.name}</span>
               </a>
             </li>
           ))}
         </ul>
-        <hr className="sm:mr-8" />
+        <hr className="sm:mr-8 my-8" />
         <ul className="channels">
           <h3>Followed Channels</h3>
           <li>
             <a href="#">
-              <i className="fa-solid fa-user-circle mr-4 text-xl"></i>
+              <i className="fa-solid fa-user-circle text-xl"></i>
               <span>Onur</span>
             </a>
           </li>
           <li>
             <a href="#">
-              <i className="fa-solid fa-user-circle mr-4 text-xl"></i>
+              <i className="fa-solid fa-user-circle text-xl"></i>
               <span>Onur 2</span>
             </a>
           </li>
           <li>
             <a href="#">
-              <i className="fa-solid fa-user-circle mr-4 text-xl"></i>
+              <i className="fa-solid fa-user-circle text-xl"></i>
               <span>Onur 3</span>
             </a>
           </li>
           <li>
             <a href="#">
-              <i className="fa-solid fa-user-circle mr-4 text-xl"></i>
+              <i className="fa-solid fa-user-circle text-xl"></i>
               <span>Onur 4</span>
             </a>
           </li>

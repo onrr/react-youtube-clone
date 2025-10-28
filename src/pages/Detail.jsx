@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import ReactPlayer from "react-player";
+import ReactPlayer from 'react-player';
 import moment from "moment";
 import { FetchAPI } from "../utils/FetchApi";
 
@@ -28,9 +28,10 @@ const Detail = () => {
     <div className="detail">
       <div className="video-detail">
         <ReactPlayer
-          url={`https://www.youtube.com/watch?v=${id}`}
+          src={`https://www.youtube.com/watch?v=${id}`}
           className="react-player"
           controls
+          playing
         />
         <h2>{detail?.snippet?.title}</h2>
         <div className="video-stats">

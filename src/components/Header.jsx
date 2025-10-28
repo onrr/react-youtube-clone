@@ -26,6 +26,12 @@ const Header = ({ isOpen, setIsOpen }) => {
         <a href="/">
           <YoutubeLogo />
         </a>
+        <a
+          href="/"
+          className="sm:hidden -ml-2 flex items-center justify-center mt-1"
+        >
+          <i className="fa-brands fa-youtube cursor-pointer text-2xl text-red-500"></i>
+        </a>
       </div>
       <form className="header-center" onSubmit={HandleSubmit}>
         <input
@@ -39,7 +45,7 @@ const Header = ({ isOpen, setIsOpen }) => {
         </button>
       </form>
       <div className="header-right">
-        <a href="#">
+        <a href="#" className=" hidden sm:inline-block">
           <i className="fa-solid fa-ellipsis-vertical cursor-pointer text-lg p-2"></i>
         </a>
         <div className="log-in">
