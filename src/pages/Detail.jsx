@@ -1,28 +1,41 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import ReactPlayer from 'react-player';
+import ReactPlayer from "react-player";
 import moment from "moment";
-import { FetchAPI } from "../utils/FetchApi";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchVideoDetail,
+  fetchRelatedVideos,
+  fetchComments,
+  clearDetail,
+} from "../redux/detailSlice";
+import { fetchChannelInfo } from "../redux/channelSlice";
 
 const Detail = () => {
-  const [detail, setDetail] = useState(null);
-  const [suggestedVideo, setSuggestedVideo] = useState(null);
-  const [comments, setComments] = useState(null);
   const { id } = useParams();
+  const dispatch = useDispatch();
+  const { video, relatedVideos, comments } = useSelector(
+    (state) => state.detail
+  );
+  const { channelInfo } = useSelector((state) => state.channel);
 
   useEffect(() => {
-    FetchAPI(`videos?part=snippet,statistics&id=${id}`).then((data) =>
-      setDetail(data.items[0])
-    );
+    if (id) {
+      dispatch(fetchVideoDetail(id));
+      dispatch(fetchRelatedVideos(id));
+      dispatch(fetchComments(id));
+    }
 
-    FetchAPI(`search?part=snippet&relatedToVideoId=${id}&type=video`).then(
-      (data) => setSuggestedVideo(data.items.slice(0, 15))
-    );
+    return () => {
+      dispatch(clearDetail());
+    };
+  }, [id, dispatch]);
 
-    FetchAPI(
-      `commentThreads?part=snippet&videoId=${id}&maxResults=30order=date`
-    ).then((data) => setComments(data.items.slice(0, 15)));
-  }, [id]);
+  useEffect(() => {
+    if (video) {
+      dispatch(fetchChannelInfo(video.snippet.channelId));
+    }
+  }, [video, dispatch]);
 
   return (
     <div className="detail">
@@ -33,17 +46,19 @@ const Detail = () => {
           controls
           playing
         />
-        <h2>{detail?.snippet?.title}</h2>
+        <h2>{video?.snippet?.title}</h2>
         <div className="video-stats">
           <div>
-            <span>{Number(detail?.statistics?.viewCount).toLocaleString('en-US')}</span>
+            <span>
+              {Number(video?.statistics?.viewCount).toLocaleString("en-US")}
+            </span>
             <span className="mx-2">•</span>
-            <span>{moment(detail?.snippet?.publishedAt).fromNow()}</span>
+            <span>{moment(video?.snippet?.publishedAt).fromNow()}</span>
           </div>
           <div className="buttons">
             <span>
               <i className="fa-solid fa-thumbs-up"></i>
-              {Number(detail?.statistics?.likeCount).toLocaleString('en-US')}
+              {Number(video?.statistics?.likeCount).toLocaleString("en-US")}
             </span>
             <span>
               <i className="fa-solid fa-thumbs-down"></i>-
@@ -59,16 +74,27 @@ const Detail = () => {
           </div>
         </div>
         <hr />
-        <div className="channel-detail">
-          <div>
-            <i className="fa-solid fa-user-circle text-4xl"></i>
-            <span className="channel-info">
-              <h3>Channel Title</h3>
-              <p>10M Subscribers</p>
-            </span>
+        {channelInfo && (
+          <div className="channel-detail">
+            <Link to={`/channel/${video?.snippet?.channelId}`}>
+              <img
+                src={channelInfo?.snippet?.thumbnails?.high?.url}
+                alt={channelInfo?.snippet?.title}
+              />
+              <span className="channel-info">
+                <h3>{channelInfo.snippet.title}</h3>
+                <p>
+                  {" "}
+                  {Number(
+                    channelInfo?.statistics?.subscriberCount
+                  ).toLocaleString("en-US")}{" "}
+                  Subscribers
+                </p>
+              </span>
+            </Link>
+            <button>Subscribe</button>
           </div>
-          <button>Subscribe</button>
-        </div>
+        )}
         <hr />
         <div className="comments">
           <ul className="comment-list">
@@ -98,7 +124,9 @@ const Detail = () => {
                   <div className="user-comment-buttons">
                     <span>
                       <i className="fa-solid fa-thumbs-up"></i>
-                      {Number(comm?.snippet?.topLevelComment?.snippet?.likeCount).toLocaleString('en-US')}
+                      {Number(
+                        comm?.snippet?.topLevelComment?.snippet?.likeCount
+                      ).toLocaleString("en-US")}
                     </span>
                     <span>
                       <i className="fa-solid fa-thumbs-down"></i>-
@@ -111,7 +139,7 @@ const Detail = () => {
         </div>
       </div>
       <div className="suggested-videos">
-        {suggestedVideo?.map((video, i) => (
+        {relatedVideos?.map((video, i) => (
           <div key={i} className="video-card">
             <Link to={`/video/${video?.id?.videoId}`}>
               <img

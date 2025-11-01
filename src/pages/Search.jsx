@@ -1,32 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import { FetchAPI } from "../utils/FetchApi";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchSearchResults,
+  setSearchQuery,
+} from "../redux/searchSlice";
 
-const Search = ({ isOpen, selectedCategory, setSelectedCategory }) => {
-  const [videos, setVideos] = useState(null);
+const Search = () => {
+  const dispatch = useDispatch();
   const { query } = useParams();
 
-  useEffect(() => {
-    setVideos(null)
-    localStorage.setItem("selectedCategory", selectedCategory);
+  const { results } = useSelector((state) => state.search);
 
-    FetchAPI(`search?part=snippet&q=${query}&type=video`).then((data) =>
-      setVideos(data.items.slice(0, 15))
-    );
-  }, [query, selectedCategory]);
+  useEffect(() => {
+    if (query) {
+      dispatch(setSearchQuery(query));
+      dispatch(fetchSearchResults(query));
+    }
+  }, [dispatch, query]);
 
   return (
     <div className="search">
-      <Sidebar
-        isOpen={isOpen}
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-      />
+      <Sidebar />
       <div className="search-main">
-        {videos?.map((video, i) => (
+        {results?.map((video, i) => (
           <div key={i} className="video-card">
             <Link to={`/video/${video?.id?.videoId}`}>
               <img

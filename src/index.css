@@ -183,8 +183,12 @@
       & .channel-detail {
         @apply flex items-center justify-between;
 
-        & > div {
+        & a {
           @apply flex items-center gap-x-4;
+
+          & img {
+            @apply block w-14 h-14 rounded-full;
+          }
 
           & > .channel-info > p {
             @apply text-[var(--color-gray)] text-sm;

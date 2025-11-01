@@ -1,54 +1,21 @@
 import "./App.css";
-import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header.jsx";
 import Home from "./pages/Home.jsx";
 import Detail from "./pages/Detail.jsx";
 import Search from "./pages/Search.jsx";
 import Channel from "./pages/Channel.jsx";
+import { useSelector } from "react-redux";
 
 function App() {
-  const [isOpen, setIsOpen] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState(() => {
-    return localStorage.getItem("selectedCategory") || "All";
-  });
-
   return (
     <BrowserRouter>
-      <Header isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Header />
       <Routes>
-        <Route
-          exact
-          path="/"
-          element={
-            <Home
-              isOpen={isOpen}
-              selectedCategory={selectedCategory}
-              setSelectedCategory={setSelectedCategory}
-            />
-          }
-        />
+        <Route exact path="/" element={<Home />} />
         <Route path="/video/:id" element={<Detail />} />
-        <Route
-          path="/channel/:id"
-          element={
-            <Channel
-              isOpen={isOpen}
-              selectedCategory={selectedCategory}
-              setSelectedCategory={setSelectedCategory}
-            />
-          }
-        />
-        <Route
-          path="/search/:query"
-          element={
-            <Search
-              isOpen={isOpen}
-              selectedCategory={selectedCategory}
-              setSelectedCategory={setSelectedCategory}
-            />
-          }
-        />
+        <Route path="/channel/:id" element={<Channel />} />
+        <Route path="/search/:query" element={<Search />} />
       </Routes>
     </BrowserRouter>
   );

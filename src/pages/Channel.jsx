@@ -1,31 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import moment from "moment";
 import Sidebar from "../components/Sidebar";
-import { FetchAPI } from "../utils/FetchApi";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchChannelInfo, fetchChannelVideos } from "../redux/channelSlice";
 
-const Channel = ({ isOpen, selectedCategory, setSelectedCategory }) => {
-  const [channelInfo, setChannelInfo] = useState(null);
-  const [channelVideos, setChannelVideos] = useState(null);
+const Channel = () => {
   const { id } = useParams();
+  const dispatch = useDispatch();
+  const { channelInfo, channelVideos } = useSelector((state) => state.channel);
 
   useEffect(() => {
-    FetchAPI(`channels?part=snippet%2Cstatistics&id=${id}`).then((data) =>
-      setChannelInfo(data.items[0])
-    );
-
-    FetchAPI(`search?channelId=${id}&part=snippet&order=date`).then((data) =>
-      setChannelVideos(data.items)
-    );
-  }, []);
+    dispatch(fetchChannelInfo(id));
+    dispatch(fetchChannelVideos(id));
+  }, [id, dispatch]);
 
   return (
     <div className="channel">
-      <Sidebar
-        isOpen={isOpen}
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-      />
+      <Sidebar />
       <div className="channel-main">
         <div className="banner">
           <img

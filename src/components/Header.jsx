@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-
 import YoutubeLogo from "./YoutubeLogo.jsx";
 import { useNavigate } from "react-router-dom";
+import { toggleIsOpen } from "../redux/categorySlice.js";
+import { useDispatch } from "react-redux";
 
-const Header = ({ isOpen, setIsOpen }) => {
+const Header = () => {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const HandleSubmit = (e) => {
     e.preventDefault();
@@ -21,7 +23,7 @@ const Header = ({ isOpen, setIsOpen }) => {
       <div className="header-left">
         <i
           className="fa-solid fa-bars cursor-pointer text-lg p-2"
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => dispatch(toggleIsOpen())}
         ></i>
         <a href="/">
           <YoutubeLogo />

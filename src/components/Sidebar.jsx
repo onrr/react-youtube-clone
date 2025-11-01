@@ -1,7 +1,12 @@
 import React from "react";
 import categories from "../data/categories.json";
+import { useDispatch, useSelector } from "react-redux";
+import { setCategory } from "../redux/categorySlice";
 
-const Sidebar = ({ isOpen, selectedCategory, setSelectedCategory }) => {
+const Sidebar = () => {
+  const dispatch = useDispatch();
+  const {selectedCategory, isOpen } = useSelector((state) => state.category)
+
   return (
     <div className="sidebar" style={{ display: isOpen ? "block" : "none" }}>
       <nav>
@@ -13,7 +18,7 @@ const Sidebar = ({ isOpen, selectedCategory, setSelectedCategory }) => {
                 className={`cursor-pointer ${
                   category.name === selectedCategory ? "active" : ""
                 }`}
-                onClick={() => setSelectedCategory(category.name)}
+                onClick={() => dispatch(setCategory(category.name))}
               >
                 <i className={`fa-solid ${category.icon}`}></i>
                 <span>{category.name}</span>
